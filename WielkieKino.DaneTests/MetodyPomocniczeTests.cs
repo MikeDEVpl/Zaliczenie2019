@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace WielkieKino.Dane.Tests
+namespace WielkieKino.Dane
 {
     [TestClass()]
     public class MetodyPomocniczeTests
@@ -15,6 +15,7 @@ namespace WielkieKino.Dane.Tests
         [TestMethod()]
         public void CzyMoznaKupicBiletTest()
         {
+            
             Assert.Fail();
 
         }
@@ -34,7 +35,8 @@ namespace WielkieKino.Dane.Tests
         [TestMethod()]
         public void CalkowitePrzychodyZBiletowTest()
         {
-            Assert.Fail();
+            CalkowitePrzychodyZBiletow(List < Bilet > sprzedaneBilety)
+            Assert.
         }
     }
 }

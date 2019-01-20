@@ -46,11 +46,11 @@ namespace WielkieKino.Dane
         {
             // np. nie można zagrać filmu "Egzamin" w sali Kameralnej 2019-01-20 o 17:00
             // można natomiast zagrać "Egzamin" w tej sali 2019-01-20 o 14:00
+            
 
             foreach (var seans in aktualneSeanse)
 	        {
-                int czasTrwaniaFilmu = film.CzasTrwania;
-
+                
 
         	}
 

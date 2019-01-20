@@ -42,7 +42,10 @@ namespace WielkieKino.Logic
 
         public List<Film> WybierzFilmyPokazywaneDanegoDnia(List<Seans> seanse, DateTime data)
         {
-            return null;
+            List<Film> filmyPokazywane = (from Seans seans in seanse
+                                          where seans.Date == data
+                                          select seans.Film).ToList();
+            return filmyPokazywane;
         }
 
         /// <summary>
@@ -52,7 +55,8 @@ namespace WielkieKino.Logic
         /// <param name="filmy"></param>
         /// <returns></returns>
         public string NajpopularniejszyGatunek(List<Film> filmy)
-        {
+        {       
+           
             // Właściwa odpowiedź: Obyczajowy
             return null;
         }
@@ -79,6 +83,8 @@ namespace WielkieKino.Logic
         public Film ZwrocFilmNaKtorySprzedanoNajwiecejBiletow(List<Film> filmy, List<Bilet> bilety)
         {
             // Właściwa odpowiedź: "Konan Destylator"
+            
+
             return null;
         }
 
