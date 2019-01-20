@@ -7,7 +7,7 @@ using System.Data.Entity;
 
 namespace WielkieKino.Lib
 {
-    class KinoContext : DbContext
+    public class KinoContext : DbContext
     {
         public DbSet<Bilet> Bilety{ get;set; }
         public DbSet<Film> Filmy { get; set; }

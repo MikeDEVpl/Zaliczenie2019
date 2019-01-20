@@ -18,6 +18,7 @@ namespace WielkieKino.Logic
             List<Film> films = (from Film film in filmy 
                                   where film.Gatunek == gatunek
                                   select film).Distinct().ToList();
+
             // Właściwa odpowiedź: np. "Konan Destylator" dla "Fantasy"
             List<string> fil = new List<string>();
             foreach (var film in films)
@@ -43,7 +44,7 @@ namespace WielkieKino.Logic
         public List<Film> WybierzFilmyPokazywaneDanegoDnia(List<Seans> seanse, DateTime data)
         {
             List<Film> filmyPokazywane = (from Seans seans in seanse
-                                          where seans.Date == data
+                                          where seans.Date.DayOfYear == data.DayOfYear
                                           select seans.Film).ToList();
             return filmyPokazywane;
         }
@@ -55,22 +56,35 @@ namespace WielkieKino.Logic
         /// <param name="filmy"></param>
         /// <returns></returns>
         public string NajpopularniejszyGatunek(List<Film> filmy)
-        {       
-           
+        {
+
             // Właściwa odpowiedź: Obyczajowy
-            return null;
+            return (from Film film in filmy
+                    orderby film.Gatunek.Count()
+                    select film.Gatunek).Last();
         }
 
         public List<Sala> ZwrocSalePosortowanePoCalkowitejLiczbieMiejsc(List<Sala> sale)
         {
             // Właściwa odpowiedź: Kameralna, Bałtyk, Wisła (lub w odwrotnej kolejności)
-            return null;
+            return (from sala in sale
+                    orderby (sala.LiczbaMiejscWRzedzie * sala.LiczbaRzedow)
+                    select sala).ToList();
         }
 
         public Sala ZwrocSaleGdzieJestNajwiecejSeansow(List<Seans> seanse, DateTime data)
         {
             // Właściwa odpowiedź dla daty 2019-01-20: sala "Wisła" 
-            return null;
+            int max = (from seans in seanse
+                    where seans.Date.DayOfYear == data.DayOfYear
+                    orderby seans.Sala
+                    select seans.Sala.Nazwa.Count()).Max();
+
+            Sala sala = (from Seans seans in seanse
+                         where seans.Date.DayOfYear == data.DayOfYear &&
+                         seans.Sala.Nazwa.Count() ==  max
+                         select seans.Sala).First();
+            return sala;
         }
 
         /// <summary>
@@ -82,8 +96,9 @@ namespace WielkieKino.Logic
         /// <returns></returns>
         public Film ZwrocFilmNaKtorySprzedanoNajwiecejBiletow(List<Film> filmy, List<Bilet> bilety)
         {
-            // Właściwa odpowiedź: "Konan Destylator"
-            
+           
+           
+
 
             return null;
         }

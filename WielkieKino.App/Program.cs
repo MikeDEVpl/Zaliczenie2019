@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WielkieKino.Lib;
 
+
 namespace WielkieKino.App
 {
     public class Program
@@ -22,8 +23,30 @@ namespace WielkieKino.App
             int liczbaRzedow = seans.Sala.LiczbaRzedow;
             int liczbaMiejsc = seans.Sala.LiczbaMiejscWRzedzie;
 
-            int [,] tab = new int[liczbaRzedow,liczbaMiejsc];
+            string[,] tab = new string[liczbaRzedow,liczbaMiejsc];
 
+            for (int i = 0; i < liczbaRzedow; i++)
+            {
+                for (int j = 0; j < liczbaMiejsc; j++)
+                {
+                    tab[i,j] = "-";
+                }
+            }
+
+            foreach (Bilet bilet in sprzedaneBilety)
+            {
+                if (bilet.Seans == seans)
+                    tab[bilet.Rzad-1, bilet.Miejsce-1] = "O";
+            }
+                       
+            for (int i = 0; i < liczbaRzedow; i++)
+            {
+                for (int j = 0; j < liczbaMiejsc; j++)
+                {
+                    Console.Write(tab[i,j]);
+                }
+                Console.WriteLine();
+            }
 
 
         }
@@ -67,6 +90,36 @@ namespace WielkieKino.App
             -----oo---
             ----------
             */
+            KinoContext db = new KinoContext();
+            Sala sala = new Sala()
+            {
+                Nazwa = "xxx",
+                LiczbaMiejscWRzedzie = 4,
+                LiczbaRzedow = 2
+            };
+            Film film = new Film()
+            {
+                Tytul = "zzz",
+                CzasTrwania = 30,
+                Gatunek = "Anime"
+            };
+            Seans seans = new Seans()
+             {
+                 Date = new DateTime(2019, 1, 20, 22, 00, 00),
+                 Film = film,
+                 Sala = sala
+             };
+
+            
+            sala.Seanse.Add(seans);
+            Bilet bilet = new Bilet(seans, 10.00, 1, 1);
+            seans.Bilety.Add(bilet);
+            film.Seanse.Add(seans);
+
+            db.Filmy.Add(film);
+            db.Seanse.Add(seans);
+            db.Sale.Add(sala);
+            db.SaveChanges();
         }
     }
 }

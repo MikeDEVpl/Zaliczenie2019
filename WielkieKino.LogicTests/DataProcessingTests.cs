@@ -43,5 +43,21 @@ namespace WielkieKino.Logic.Tests
             Film film = dp.ZwrocFilmNaKtorySprzedanoNajwiecejBiletow(Dane.SkladDanych.Filmy, Dane.SkladDanych.Bilety);
             Assert.AreEqual(film.Tytul, "Konan Destylator");
         }
+
+        [TestMethod()]
+        public void NajpopularniejszyGatunekTest()
+        {
+            DataProcessing dp = new DataProcessing();
+            string gatunek = dp.NajpopularniejszyGatunek(Dane.SkladDanych.Filmy);
+            Assert.AreEqual(gatunek, "Obyczajowy");
+        }
+
+        [TestMethod()]
+        public void ZwrocSaleGdzieJestNajwiecejSeansowTest()
+        {
+            DataProcessing dp = new DataProcessing();
+            Sala sala = dp.ZwrocSaleGdzieJestNajwiecejSeansow(Dane.SkladDanych.Seanse, new DateTime(2019, 01, 20));
+            Assert.AreEqual(sala.Nazwa, "Wisła");
+        }
     }
 }

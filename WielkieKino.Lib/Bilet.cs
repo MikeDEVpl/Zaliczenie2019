@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace WielkieKino.Lib
 {
     public class Bilet
     {
-        public Seans Seans { get; private set; }
+        //public Seans Seans { get; private set; }
         public double Cena { get; private set; }
         public int Rzad { get; private set; }
         public int Miejsce { get; private set; }
@@ -20,5 +21,11 @@ namespace WielkieKino.Lib
             Rzad = rzad;
             Miejsce = miejsce;
         }
+
+        [Key]
+        public int ID { get; set; }
+
+        public virtual Seans Seans { get; set; }
+
     }
 }
