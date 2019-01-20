@@ -22,7 +22,15 @@ namespace WielkieKino.Dane
         /// <returns></returns>
         public bool CzyMoznaKupicBilet(List<Bilet> sprzedaneBilety, Seans seans, int rzad, int miejsce)
         {
-            return false;
+            foreach (var bilet in sprzedaneBilety)
+            {
+                if (bilet.Miejsce == miejsce && bilet.Rzad == rzad && bilet.Seans == seans)
+                {
+                    return false;
+                }
+            }
+	
+            return true;
         }
 
         /// <summary>
@@ -38,6 +46,15 @@ namespace WielkieKino.Dane
         {
             // np. nie można zagrać filmu "Egzamin" w sali Kameralnej 2019-01-20 o 17:00
             // można natomiast zagrać "Egzamin" w tej sali 2019-01-20 o 14:00
+
+            foreach (var seans in aktualneSeanse)
+	        {
+                int czasTrwaniaFilmu = film.CzasTrwania;
+
+
+        	}
+
+
             return false;
         }
 
@@ -49,14 +66,30 @@ namespace WielkieKino.Dane
         /// <returns></returns>
         public int LiczbaWolnychMiejscWSali(List<Bilet> sprzedaneBilety, Seans seansDoSprawdzenia)
         {
+            int liczbaWykupionychBiletow = 0;
+            int liczbaMiejscWsali=seansDoSprawdzenia.Sala.LiczbaMiejscWRzedzie * seansDoSprawdzenia.Sala.LiczbaRzedow;
+
+            foreach (var bilet in sprzedaneBilety)
+	        {
+                if(bilet.Seans == seansDoSprawdzenia)
+                {
+                    liczbaWykupionychBiletow ++;
+                }
+
+        	}
             // Właściwa odpowiedź: np. na pierwszy seans z listy seansów w klasie SkladDanych są 72 miejsca
-            return 0;
+            return liczbaMiejscWsali - liczbaWykupionychBiletow;
         }
 
         public double CalkowitePrzychodyZBiletow(List<Bilet> sprzedaneBilety)
         {
+            double sumaBiletow = 0;
+            foreach (var bilet in sprzedaneBilety)
+	        {
+                sumaBiletow += bilet.Cena;
+	        }
             // Właściwa odpowiedź: 400.00
-            return 0.0;
+            return sumaBiletow;
         }
     }
 }

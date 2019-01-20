@@ -15,8 +15,16 @@ namespace WielkieKino.Logic
     {
         public List<string> WybierzFilmyZGatunku(List<Film> filmy, string gatunek)
         {
+            List<Film> films = (from Film film in filmy 
+                                  where film.Gatunek == gatunek
+                                  select film).Distinct().ToList();
             // Właściwa odpowiedź: np. "Konan Destylator" dla "Fantasy"
-            return null;
+            List<string> fil = new List<string>();
+            foreach (var film in films)
+	        {
+                fil.Add(film.Tytul);
+        	}
+            return fil;
         }
 
         /// <summary>
@@ -26,8 +34,10 @@ namespace WielkieKino.Logic
         /// <returns></returns>
         public int PodajCalkowiteWplywyZBiletow(List<Bilet> bilety)
         {
+            double suma = (from Bilet bilet in bilety
+                        select bilet.Cena).Sum();
             // Właściwa odpowiedź: 400
-            return -1;
+            return (int)suma;
         }
 
         public List<Film> WybierzFilmyPokazywaneDanegoDnia(List<Seans> seanse, DateTime data)

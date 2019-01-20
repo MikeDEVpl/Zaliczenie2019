@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace WielkieKino.Dane.Tests
 {
     [TestClass()]
@@ -15,6 +16,7 @@ namespace WielkieKino.Dane.Tests
         public void CzyMoznaKupicBiletTest()
         {
             Assert.Fail();
+
         }
 
         [TestMethod()]
